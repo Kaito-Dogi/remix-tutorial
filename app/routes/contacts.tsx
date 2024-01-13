@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+
 import { createEmptyContact, getContacts } from "~/data";
 
 export const action = async () => {

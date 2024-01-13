@@ -2,10 +2,12 @@ import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import type { FunctionComponent } from "react";
 import invariant from "tiny-invariant";
+
+import { MISSING_CONTACT_ID_PARAM } from "~/consts";
 import { getContact, type ContactRecord } from "~/data";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  invariant(params.contactId, "Missing contactId param");
+  invariant(params.contactId, MISSING_CONTACT_ID_PARAM);
 
   const contact = await getContact(params.contactId);
 
