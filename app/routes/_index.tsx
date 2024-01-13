@@ -41,7 +41,7 @@ export default function Index() {
       <h2>Practices</h2>
       <ul>
         <li>
-          <Link to={`/contacts`}>Tutorial (30m)</Link>
+          <Link to={`/contacts`}>Contacts Tutorial</Link>
         </li>
       </ul>
     </div>
