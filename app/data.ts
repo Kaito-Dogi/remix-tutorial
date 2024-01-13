@@ -302,6 +302,12 @@ export async function deleteContact(id: string) {
     last: "Jensen",
     twitter: "@jenseng",
   },
+  {
+    avatar: "https://avatars.githubusercontent.com/u/49048577?v=4",
+    first: "Kaito",
+    last: "Dogi",
+    twitter: "@kaito_dogi",
+  },
 ].forEach((contact) => {
   fakeContacts.create({
     ...contact,
