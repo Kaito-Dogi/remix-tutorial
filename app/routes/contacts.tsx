@@ -1,6 +1,12 @@
-import { Form, LiveReload, Scripts, ScrollRestoration } from "@remix-run/react";
+import {
+  Form,
+  LiveReload,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react";
 
-export default function App() {
+export default function Contacts() {
   return (
     <>
       <div id="sidebar">
@@ -30,6 +36,9 @@ export default function App() {
             </li>
           </ul>
         </nav>
+      </div>
+      <div id="detail">
+        <Outlet />
       </div>
       <ScrollRestoration />
       <Scripts />
