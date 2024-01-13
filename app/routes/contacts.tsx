@@ -1,8 +1,8 @@
 import { json, redirect } from "@remix-run/node";
 import {
   Form,
-  Link,
   LiveReload,
+  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -49,7 +49,12 @@ export default function Contacts() {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                  <Link to={`/contacts/${contact.id}`}>
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                    to={`/contacts/${contact.id}`}
+                  >
                     {contact.first || contact.last ? (
                       <>
                         {contact.first} {contact.last}
@@ -58,7 +63,7 @@ export default function Contacts() {
                       <i>No Name</i>
                     )}{" "}
                     {contact.favorite ? <span>★</span> : null}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
