@@ -13,6 +13,7 @@ import {
 import { useEffect } from "react";
 
 import { createEmptyContact, getContacts } from "~/data";
+import { sleep } from "~/utils";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -22,7 +23,12 @@ export const action = async () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
+
+  // Global Pending UI を試すため、1秒遅延させる
+  sleep(1000);
+
   const contacts = await getContacts(q);
+
   return json({ contacts, q });
 };
 
@@ -30,6 +36,10 @@ export default function Contacts() {
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const submit = useSubmit();
+
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
 
   // 非制御
   useEffect(() => {
@@ -42,7 +52,9 @@ export default function Contacts() {
   return (
     <>
       <div
-        className={navigation.state === "loading" ? "loading" : ""}
+        className={
+          navigation.state === "loading" && !searching ? "loading" : ""
+        }
         id="sidebar"
       >
         <h1>Remix Contacts</h1>
@@ -54,13 +66,14 @@ export default function Contacts() {
           >
             <input
               aria-label="Search contacts"
+              className={searching ? "loading" : ""}
               defaultValue={q || ""}
               id="q"
               name="q"
               placeholder="Search"
               type="search"
             />
-            <div aria-hidden hidden={true} id="search-spinner" />
+            <div aria-hidden hidden={!searching} id="search-spinner" />
           </Form>
           <Form method="post">
             <button type="submit">New</button>

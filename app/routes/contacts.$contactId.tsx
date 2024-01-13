@@ -5,13 +5,13 @@ import invariant from "tiny-invariant";
 
 import { MISSING_CONTACT_ID_PARAM } from "~/consts";
 import { getContact, type ContactRecord } from "~/data";
+import { sleep } from "~/utils";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.contactId, MISSING_CONTACT_ID_PARAM);
 
-  // Global Pending UI を試すため、3秒遅延させる
-  // const start = Date.now();
-  // while (Date.now() - start < 3000) {}
+  // Global Pending UI を試すため、1秒遅延させる
+  sleep(1000);
 
   const contact = await getContact(params.contactId);
 
