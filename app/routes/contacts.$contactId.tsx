@@ -9,6 +9,10 @@ import { getContact, type ContactRecord } from "~/data";
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.contactId, MISSING_CONTACT_ID_PARAM);
 
+  // Global Pending UI を試すため、3秒遅延させる
+  // const start = Date.now();
+  // while (Date.now() - start < 3000) {}
+
   const contact = await getContact(params.contactId);
 
   if (!contact) {

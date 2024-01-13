@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigation,
 } from "@remix-run/react";
 
 import { createEmptyContact, getContacts } from "~/data";
@@ -24,10 +25,14 @@ export const loader = async () => {
 
 export default function Contacts() {
   const { contacts } = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
 
   return (
     <>
-      <div id="sidebar">
+      <div
+        className={navigation.state === "loading" ? "loading" : ""}
+        id="sidebar"
+      >
         <h1>Remix Contacts</h1>
         <div>
           <Form id="search-form" role="search">
